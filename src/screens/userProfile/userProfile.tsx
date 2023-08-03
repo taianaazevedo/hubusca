@@ -15,7 +15,7 @@ import { useNavigation } from "@react-navigation/native";
 import api from "../../services/api";
 import { useEffect, useState } from "react";
 import { UserDetails, UserRepositories } from "../../types/types";
-
+import Repository from "../../components/repositoryList/repositoryList";
 
 export default function Profile({ route }: any) {
   const navigation = useNavigation<StackTypes>();
@@ -93,6 +93,14 @@ export default function Profile({ route }: any) {
             <Text>Não foi possível recuperar as informações desse usuário</Text>
           )}
           <StyledText3>Repositórios</StyledText3>
+          <FlatList
+            showsVerticalScrollIndicator={false}
+            data={respository}
+            keyExtractor={(item) => item.id.toString()}
+            renderItem={({ item }) => {
+              return <Repository {...item} />;
+            }}
+          />
         </StyledView>
       </StyledContainer>
     </LinearGradient>
