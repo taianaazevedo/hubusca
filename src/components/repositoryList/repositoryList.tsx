@@ -1,4 +1,4 @@
-import { Text, TouchableOpacity, Linking} from "react-native";
+import { Text, TouchableOpacity, Linking, Alert} from "react-native";
 import { StyledTitle, StyledView, StyledInfo } from "./repositoryStyled";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
@@ -29,7 +29,7 @@ export default function Repository({
     if (supported) {
       await Linking.openURL(html_url);
     } else {
-      console.log(`Não é possível abrir o link: ${html_url}`);
+      Alert.alert(`Não é possível abrir o link: ${html_url}`);
     }
   }
 
