@@ -19,7 +19,7 @@ import Repository from "../../components/repositoryList/repositoryList";
 
 export default function Profile({ route }: any) {
   const navigation = useNavigation<StackTypes>();
-  const { login, name, avatar_url, location } = route.params;
+  const { login } = route.params;
   const [userInfo, setUserInfo] = useState<UserDetails | null>(null);
   const [repository, setRepository] = useState<UserRepositories | []>([]);
   const [error, setError] = useState(false);
@@ -67,21 +67,21 @@ export default function Profile({ route }: any) {
             onPress={() => navigation.pop()}
           />
           <Image
-            source={{ uri: `${avatar_url}` }}
+            source={{ uri: `${userInfo?.avatar_url}` }}
             style={{ width: 100, height: 100, borderRadius: 100 }}
           />
-          <StyledText>{name} </StyledText>
+          <StyledText>{userInfo?.name} </StyledText>
           <StyledText2>
             @{login} | id: {userInfo?.id}{" "}
           </StyledText2>
-          {location && (
+          {userInfo?.location && (
             <StyledLocation>
               <Ionicons
                 name="location"
                 size={15}
                 style={{ marginRight: 5, color: "white" }}
               />
-              <StyledText2>{location} </StyledText2>
+              <StyledText2>{userInfo?.location} </StyledText2>
             </StyledLocation>
           )}
 

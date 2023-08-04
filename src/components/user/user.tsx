@@ -16,7 +16,7 @@ export default function User({ avatar_url, name, login, location }: UserInfo) {
   return (
     <>
       <StyledView>
-        <TouchableOpacity onPress={() => navigation.navigate("Profile", {login, name, location, avatar_url})}>
+        <TouchableOpacity onPress={() => navigation.navigate("Profile", {login})}>
           <Image
             source={{ uri: `${avatar_url}` }}
             style={{ width: 250, height: 250, borderRadius: 150 }}

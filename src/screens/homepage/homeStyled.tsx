@@ -7,7 +7,18 @@ export const StyledView = styled.View`
 `;
 
 export const StyledError = styled.Text`
-font-size: 20px;
-color: #ffffff;
-margin-top: 50px;
+  font-size: 20px;
+  color: #ffffff;
+  margin-top: 50px;
+`;
+export const StyledRecentSearchContainer = styled.View`
+  flex: 1;
+  justify-content: flex-end;
+`;
+
+export const StyledRecentSearch = styled.TouchableOpacity`
+flex-direction: row;
+justify-content: flex-end;
+align-items: center;
+margin-bottom: 30px;
 `
