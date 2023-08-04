@@ -21,7 +21,7 @@ export default function Profile({ route }: any) {
   const navigation = useNavigation<StackTypes>();
   const { login, name, avatar_url, location } = route.params;
   const [userInfo, setUserInfo] = useState<UserDetails | null>(null);
-  const [respository, setRepository] = useState<UserRepositories | []>([]);
+  const [repository, setRepository] = useState<UserRepositories | []>([]);
   const [error, setError] = useState(false);
 
   async function getUser() {
@@ -38,8 +38,12 @@ export default function Profile({ route }: any) {
       const result = await api.get(`/users/${login}/repos`);
       setRepository(result.data);
     } catch (error) {
-      console.log(error);
+      setError(true);
     }
+  }
+
+  function ErrorMessage(){
+    return <Text>Não foi possível recuperar as informações desse usuário</Text>
   }
 
   useEffect(() => {
@@ -89,13 +93,11 @@ export default function Profile({ route }: any) {
               Repositórios: {userInfo?.public_repos}
             </Text>
           </StyledInfos>
-          {error && (
-            <Text>Não foi possível recuperar as informações desse usuário</Text>
-          )}
           <StyledText3>Repositórios</StyledText3>
+          {error && <ErrorMessage/>}
           <FlatList
             showsVerticalScrollIndicator={false}
-            data={respository}
+            data={repository}
             keyExtractor={(item) => item.id.toString()}
             renderItem={({ item }) => {
               return <Repository {...item} />;

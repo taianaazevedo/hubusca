@@ -1,4 +1,4 @@
-import { Text } from "react-native";
+import { Text, TouchableOpacity, Linking} from "react-native";
 import { StyledTitle, StyledView, StyledInfo } from "./repositoryStyled";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
@@ -24,48 +24,61 @@ export default function Repository({
   const pusehdDate = new Date(pushed_at);
   const formattedPushedDate = pusehdDate.toLocaleDateString();
 
+  async function goToRepository(html_url: string){
+    const supported = await Linking.canOpenURL(html_url);
+    if (supported) {
+      await Linking.openURL(html_url);
+    } else {
+      console.log(`Não é possível abrir o link: ${html_url}`);
+    }
+  }
+
   return (
     <StyledView>
-      <StyledTitle>
-        <Ionicons
-          name="logo-github"
-          style={{ marginRight: 5, color: "white" }}
-          size={18}
-        />
-        <Text style={{ color: "white", fontSize: 18, fontWeight: "bold" }}>
-          {name}
-        </Text>
-      </StyledTitle>
-      {language && (
+      <TouchableOpacity onPress={() => goToRepository(html_url)}>
+        <StyledTitle>
+          <Ionicons
+            name="logo-github"
+            style={{ marginRight: 5, color: "white" }}
+            size={18}
+          />
+          <Text style={{ color: "white", fontSize: 18, fontWeight: "bold" }}>
+            {name}
+          </Text>
+        </StyledTitle>
+        {language && (
+          <StyledInfo>
+            <Text style={{ color: "white", fontWeight: "bold" }}>
+              Linguagem utilizada:{" "}
+            </Text>
+            <Text style={{ color: "white" }}>{language}</Text>
+          </StyledInfo>
+        )}
+        {description && (
+          <StyledInfo>
+            <Text style={{ color: "white", fontWeight: "bold" }}>
+              Descrição:{" "}
+            </Text>
+            <Text style={{ color: "white" }}>{description}</Text>
+          </StyledInfo>
+        )}
         <StyledInfo>
           <Text style={{ color: "white", fontWeight: "bold" }}>
-            Linguagem utilizada:{" "}
+            Criado em:{" "}
           </Text>
-          <Text style={{ color: "white"}}>{language}</Text>
+          <Text style={{ color: "white" }}>{formattedCreatedDate}</Text>
         </StyledInfo>
-      )}
-      {description && (
         <StyledInfo>
           <Text style={{ color: "white", fontWeight: "bold" }}>
-            Descrição:{" "}
+            Último push:{" "}
           </Text>
-          <Text style={{ color: "white"}}>{description}</Text>
+          <Text style={{ color: "white" }}>{formattedPushedDate}</Text>
         </StyledInfo>
-      )}
-      <StyledInfo>
-        <Text style={{ color: "white", fontWeight: "bold" }}>Criado em: </Text>
-        <Text style={{ color: "white"}}>{formattedCreatedDate}</Text>
-      </StyledInfo>
-      <StyledInfo>
-        <Text style={{ color: "white", fontWeight: "bold" }}>
-          Último push:{" "}
-        </Text>
-        <Text style={{ color: "white"}}>{formattedPushedDate}</Text>
-      </StyledInfo>
-      <StyledInfo>
-        <Text style={{ color: "white", fontWeight: "bold" }}>LInk: </Text>
-        <Text style={{ color: "white"}}>{html_url}</Text>
-      </StyledInfo>
+        <StyledInfo>
+          <Text style={{ color: "white", fontWeight: "bold" }}>LInk: </Text>
+          <Text style={{ color: "white" }}>{html_url}</Text>
+        </StyledInfo>
+      </TouchableOpacity>
     </StyledView>
   );
 }
