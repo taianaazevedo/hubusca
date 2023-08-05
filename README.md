@@ -7,6 +7,6 @@
 <br/>
 - npm i para instalar as dependências;
 <br/>
-- baixar o app Expo para visualizar o app;
+- baixar o app Expo no seu celular para visualizar o app;
 <br/>
 - npm start, para gerar o QR code que permitirá o app Expo executar a aplicação.
