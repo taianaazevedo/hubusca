@@ -27,6 +27,7 @@ export default function LastSearch({ route }: any) {
       </StyledView>
       <FlatList
         data={lastSearch}
+        keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => {
           return (
             <TouchableOpacity
