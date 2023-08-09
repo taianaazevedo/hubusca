@@ -1,6 +1,7 @@
 import { Text, TouchableOpacity, Linking, Alert} from "react-native";
 import { StyledTitle, StyledView, StyledInfo } from "./repositoryStyled";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import { StyleSheet } from "react-native";
 
 type RepositoryParams = {
   name: string;
@@ -48,37 +49,47 @@ export default function Repository({
         </StyledTitle>
         {language && (
           <StyledInfo>
-            <Text style={{ color: "white", fontWeight: "bold" }}>
+            <Text style={styles.infos}>
               Linguagem utilizada:{" "}
             </Text>
-            <Text style={{ color: "white" }}>{language}</Text>
+            <Text  style={styles.date}>{language}</Text>
           </StyledInfo>
         )}
         {description && (
           <StyledInfo>
-            <Text style={{ color: "white", fontWeight: "bold" }}>
+            <Text style={styles.infos}>
               Descrição:{" "}
             </Text>
-            <Text style={{ color: "white" }}>{description}</Text>
+            <Text  style={styles.date}>{description}</Text>
           </StyledInfo>
         )}
         <StyledInfo>
-          <Text style={{ color: "white", fontWeight: "bold" }}>
+          <Text style={styles.infos}>
             Criado em:{" "}
           </Text>
-          <Text style={{ color: "white" }}>{formattedCreatedDate}</Text>
+          <Text  style={styles.date}>{formattedCreatedDate}</Text>
         </StyledInfo>
         <StyledInfo>
-          <Text style={{ color: "white", fontWeight: "bold" }}>
+          <Text style={styles.infos}>
             Último push:{" "}
           </Text>
-          <Text style={{ color: "white" }}>{formattedPushedDate}</Text>
+          <Text  style={styles.date}>{formattedPushedDate}</Text>
         </StyledInfo>
         <StyledInfo>
-          <Text style={{ color: "white", fontWeight: "bold" }}>LInk: </Text>
-          <Text style={{ color: "white" }}>{html_url}</Text>
+          <Text style={styles.infos}>Link: </Text>
+          <Text style={styles.date}>{html_url}</Text>
         </StyledInfo>
       </TouchableOpacity>
     </StyledView>
   );
 }
+
+const styles = StyleSheet.create({
+  infos: {
+    color: "white",
+    fontWeight: "bold"
+  },
+  date : {
+    color: "white"
+  }
+})
